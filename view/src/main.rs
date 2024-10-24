@@ -1,13 +1,27 @@
-// src/main.rs
+pub mod protomessagergateway {
+    tonic::include_proto!("protomessagergateway"); // Match this with the package name in your .proto file
+}
+use protomessagergateway::map_service_client::MapServiceClient;
+use protomessagergateway::{MapRequest, MapResponse};
+// use tonic::transport::Channel;
 
-use proto_files::map::A; // Import MapRequest from the generated module
-use proto_files::protomessagergateway::MapResponse; // Import MapResponse from the messager module
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // Connect to the gRPC server
+    let mut client = MapServiceClient::connect("http://localhost:50051").await?;
 
-fn main() {
-    // Now you can use the `map` and `messager` modules here
-    let map_data = A::default(); // Use the correct method to instantiate
-    let messager_data = MapResponse::default(); // Instantiate the message
+    // Create a request
+    let request = tonic::Request::new(MapRequest {
+        alt: "foo".to_string(),
+        lat: "42".to_string(),
+        lon: "42".to_string(),
+    });
 
-    println!("{:?}", map_data);
-    println!("{:?}", messager_data);
+    // Call the gRPC method
+    let response: MapResponse = client.map(request).await?.into_inner();
+
+    // Print the response
+    println!("Response: {:?}", response);
+
+    Ok(())
 }

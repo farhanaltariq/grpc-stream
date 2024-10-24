@@ -1,14 +1,2 @@
 syntax = "proto3";
 package map;
-option go_package = "github.com/farhanaltariq/proto/map";
-message A{
-    string req = 1;
-}
-
-message B{
-    string res = 1;
-}
-
-service MapService{
-    rpc Hello(A) returns (B);
-}

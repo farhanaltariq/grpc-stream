@@ -4,6 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-prost = "0.11"
-prost-types = "0.11"
-proto-files = { path = "../proto/rust" }
+prost = "0.13.3"
+prost-types = "0.13.3"
+tonic = "0.12.3"           # gRPC library
+tokio = { version = "1", features = ["full"] } # Async runtime
+
+[build-dependencies]
+tonic-build = "0.12.3"           # gRPC library
