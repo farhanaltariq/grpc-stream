@@ -1,0 +1,19 @@
+syntax = "proto3";
+package protomessagergateway;
+option go_package = "github.com/farhanaltariq/proto/protomessagergateway";
+message MapRequest{
+    string alt = 1;
+    string lat = 2;
+    string lon = 3;
+}
+
+message MapResponse{
+    string status = 1;
+    string alt = 2;
+    string lat = 3;
+    string lon = 4;
+}
+
+service MapService{
+    rpc Map(MapRequest) returns (MapResponse);
+}
