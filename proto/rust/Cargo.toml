@@ -1,0 +1,8 @@
+[package]
+name = "proto-files"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+prost = "0.11"
+prost-types = "0.11"
